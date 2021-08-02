@@ -18,9 +18,16 @@
 
     <properties>
         <java.version>11</java.version>
+        <olingo2.version>2.0.11</olingo2.version>
+        <postgresql.version>42.2.23</postgresql.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -29,11 +36,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
         </dependency>
 
         <dependency>
@@ -50,52 +52,59 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
         </dependency>
 
-            <dependency>
-                <groupId>org.apache.olingo</groupId>
-                <artifactId>olingo-odata2-core</artifactId>
-                <version>2.0.11</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.ws.rs</groupId>
-                        <artifactId>javax.ws.rs-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+        <!-- Olingo 2 Dependencies -->
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-core</artifactId>
+            <version>${olingo2.version}</version>
+            <!-- Avoid jax-rs version conflict by excluding Olingo's version -->
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>javax.ws.rs-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-            <dependency>
-                <groupId>org.apache.olingo</groupId>
-                <artifactId>olingo-odata2-jpa-processor-core</artifactId>
-                <version>2.0.11</version>
-            </dependency>
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-jpa-processor-core</artifactId>
+            <version>${olingo2.version}</version>
+        </dependency>
 
-            <dependency>
-                <groupId>org.apache.olingo</groupId>
-                <artifactId>olingo-odata2-jpa-processor-ref</artifactId>
-                <version>2.0.11</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.eclipse.persistence</groupId>
-                        <artifactId>eclipselink</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-jpa-processor-ref</artifactId>
+            <version>${olingo2.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>eclipselink</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.23</version>
+            <version>${postgresql.version}</version>
         </dependency>
 
     </dependencies>
